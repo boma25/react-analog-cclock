@@ -5,28 +5,26 @@ import "./App.css"
 
 function App() {
 	const date = new Date()
-	const [hands, setHands] = useState({
-		second: date.getSeconds() * 6,
-		minute: date.getMinutes() * 6,
-		hour:
-			date.getHours() >= 12
-				? (date.getHours() - 12) * 30
-				: date.getHours() * 30,
+	const [clockHand, setClockHand] = useState({
+		secondHand: date.getSeconds() * 6,
+		minuteHand: date.getMinutes() * 6,
+		hourHand: date.getHours() * 30,
 	})
+
 	useEffect(() => {
-		let newDate = new Date()
-		setTimeout(() => {
-			setHands({
-				second: newDate.getSeconds() * 6,
-				minute: newDate.getMinutes() * 6,
-				hour:
-					newDate.getHours() >= 12
-						? (newDate.getHours() - 12) * 30
-						: newDate.getHours() * 30,
-			})
-		}, 1000)
-		// }
-	}, [hands])
+		const date = new Date()
+
+		setTimeout(
+			() =>
+				setClockHand({
+					secondHand: date.getSeconds() * 6,
+					minuteHand: date.getMinutes() * 6,
+					hourHand: date.getHours() * 30,
+				}),
+			1000
+		)
+	}, [clockHand])
+
 	return (
 		<div
 			style={{ height: window.innerHeight }}
@@ -39,23 +37,23 @@ function App() {
 				<p className="">12</p>
 				<div className="flex justify-between w-full items-center">
 					<div
-						className="w-1 h-28  absolute "
+						className="w-1 h-28  absolute bg-white "
 						style={{
-							transform: `translate(95px) rotate(${hands.hour}deg)`,
+							transform: `translate(95px) rotate(${clockHand.hourHand}deg)`,
+							background: "linear-gradient(#ffffff 52%,transparent 45%)",
+						}}
+					/>
+					<div
+						className="w-1 h-32  absolute bg-white "
+						style={{
+							transform: `translate(95px) rotate(${clockHand.minuteHand}deg)`,
 							background: "linear-gradient(#ffffff 52%,transparent 45%)",
 						}}
 					/>
 					<div
 						className="w-1 h-32  absolute "
 						style={{
-							transform: `translate(95px) rotate(${hands.minute}deg)`,
-							background: "linear-gradient(#ffffff 52%,transparent 45%)",
-						}}
-					/>
-					<div
-						className="w-1 h-32 absolute "
-						style={{
-							transform: `translate(95px) rotate(${hands.second}deg)`,
+							transform: `translate(95px) rotate(${clockHand.secondHand}deg)`,
 							background: "linear-gradient(red 52%,transparent 45%)",
 						}}
 					/>
@@ -70,12 +68,3 @@ function App() {
 }
 
 export default App
-
-/**	: minuteHand.z > 117
-					? minuteHand.z > 235
-						? minuteHand.z % 4 === 0
-							? minuteHand.x + 0.7
-							: minuteHand.x
-						: minuteHand.z % 4 === 0
-						? minuteHand.x - 1.7
-						: minuteHand.x */
