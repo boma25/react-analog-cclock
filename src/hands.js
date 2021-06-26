@@ -3,25 +3,16 @@
 import React, { useState, useEffect } from "react"
 
 const Hands = () => {
-	const date = new Date()
-	const [clockHand, setClockHand] = useState({
-		secondHand: date.getSeconds() * 6,
-		minuteHand: date.getMinutes() * 6,
-		hourHand: date.getHours() * 30,
-	})
+	const [clockHand, setClockHand] = useState({})
 
 	useEffect(() => {
 		const date = new Date()
 
-		setTimeout(
-			() =>
-				setClockHand({
-					secondHand: date.getSeconds() * 6,
-					minuteHand: date.getMinutes() * 6,
-					hourHand: date.getHours() * 30,
-				}),
-			1000
-		)
+		setClockHand({
+			secondHand: date.getSeconds() * 6,
+			minuteHand: date.getMinutes() * 6,
+			hourHand: date.getHours() * 30,
+		})
 	}, [clockHand])
 
 	const hands = [
