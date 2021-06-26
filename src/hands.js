@@ -39,13 +39,9 @@ const Hands = () => {
 		},
 	]
 
-	return (
-		<div className="absolute items-center flex">
-			{hands.map((value, index) => (
-				<div key={index} className={value.className} style={value.style} />
-			))}
-		</div>
-	)
+	return hands.map((value, index) => (
+		<div key={index} className={value.className} style={value.style} />
+	))
 }
 
 export default Hands
