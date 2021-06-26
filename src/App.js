@@ -1,30 +1,9 @@
 /** @format */
 
-import React, { useState, useEffect } from "react"
-import "./App.css"
+import React from "react"
+import Hands from "./hands"
 
 function App() {
-	const date = new Date()
-	const [clockHand, setClockHand] = useState({
-		secondHand: date.getSeconds() * 6,
-		minuteHand: date.getMinutes() * 6,
-		hourHand: date.getHours() * 30,
-	})
-
-	useEffect(() => {
-		const date = new Date()
-
-		setTimeout(
-			() =>
-				setClockHand({
-					secondHand: date.getSeconds() * 6,
-					minuteHand: date.getMinutes() * 6,
-					hourHand: date.getHours() * 30,
-				}),
-			1000
-		)
-	}, [clockHand])
-
 	return (
 		<div
 			style={{ height: window.innerHeight }}
@@ -36,27 +15,7 @@ function App() {
 			>
 				<p className="">12</p>
 				<div className="flex justify-between w-full items-center">
-					<div
-						className="w-1 h-28  absolute bg-white "
-						style={{
-							transform: `translate(95px) rotate(${clockHand.hourHand}deg)`,
-							background: "linear-gradient(#ffffff 52%,transparent 45%)",
-						}}
-					/>
-					<div
-						className="w-1 h-32  absolute bg-white "
-						style={{
-							transform: `translate(95px) rotate(${clockHand.minuteHand}deg)`,
-							background: "linear-gradient(#ffffff 52%,transparent 45%)",
-						}}
-					/>
-					<div
-						className="w-1 h-32  absolute "
-						style={{
-							transform: `translate(95px) rotate(${clockHand.secondHand}deg)`,
-							background: "linear-gradient(red 52%,transparent 45%)",
-						}}
-					/>
+					<Hands />
 					<p>9</p>
 					<div className="w-3 h-3 rounded-full bg-white " />
 					<p>3</p>
